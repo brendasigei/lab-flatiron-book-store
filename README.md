@@ -104,3 +104,16 @@ And it's gone!
 [code-injection]:
   https://www.reddit.com/r/learnjavascript/comments/9502x5/is_innerhtml_still_considered_bad/e3p31go/?utm_source=share&utm_medium=web2x&context=3
 [classlist]: https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+
+# Flatbooks
+
+A bookstore page that builds its book list from the `bookStore` object using DOM manipulation.
+
+## Run it
+1. `npm install`
+2. Open `index.html` in a browser
+3. `npm test` to run the tests
+
+## What it does
+- Sets the page title from `bookStore.name`
+- Creates an `li` with title, author, and image for every book

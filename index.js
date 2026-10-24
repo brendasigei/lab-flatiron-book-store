@@ -1,140 +1,71 @@
-// Step 3: Catalog of books saved to an object array
-const bookCatalog = [
-  {
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    price: "$10.99",
-    image: "https://via.placeholder.com/150?text=The+Great+Gatsby"
-  },
-  {
-    title: "To Kill a Mockingbird",
-    author: "Harper Lee",
-    price: "$12.50",
-    image: "https://via.placeholder.com/150?text=To+Kill+a+Mockingbird"
-  },
-  {
-    title: "1984",
-    author: "George Orwell",
-    price: "$9.99",
-    image: "https://via.placeholder.com/150?text=1984"
-  }
-];
+// 1. Books saved to an object
+const books = {
+  1: { title: "Sample Book One", author: "Author A", price: 12.99 },
+  2: { title: "Sample Book Two", author: "Author B", price: 9.5 },
+  3: { title: "Sample Book Three", author: "Author C", price: 15.0 }
+};
 
-// -------------------------------------------------------------
-// STEP 1: Update the existing title on the page
-// -------------------------------------------------------------
-const titleElement = document.querySelector("#store-title");
-titleElement.textContent = "Welcome to Flatbooks Bookstore";
+// 2. Update the existing title on the page
+const storeTitle = document.querySelector("#store-title"); // match your template's selector
+storeTitle.textContent = "Flatbooks";
 
-// -------------------------------------------------------------
-// STEP 2 & 4: Add elements for every book using DOM manipulation
-// -------------------------------------------------------------
-const catalogContainer = document.querySelector("#book-catalog");
+// 3. Add an element for every book in the catalog
+const bookList = document.querySelector("#book-list"); // match your template's container
 
-// Loop through each book object in the catalog
-bookCatalog.forEach((book) => {
-  // Create a container card for the book
-  const bookCard = document.createElement("div");
-  bookCard.classList.add("book-card");
+Object.values(books).forEach((book) => {
+  const card = document.createElement("div");
+  card.className = "book";
 
-  // Create image element
-  const img = document.createElement("img");
-  img.src = book.image;
-  img.alt = book.title;
+  const title = document.createElement("h2");
+  title.textContent = book.title;
 
-  // Create title element
-  const h3 = document.createElement("h3");
-  h3.textContent = book.title;
+  const author = document.createElement("p");
+  author.textContent = `by ${book.author}`;
 
-  // Create author element
-  const authorP = document.createElement("p");
-  authorP.textContent = `By: ${book.author}`;
+  const price = document.createElement("p");
+  price.textContent = `$${book.price.toFixed(2)}`;
 
-  // Create price element
-  const priceP = document.createElement("p");
-  priceP.textContent = `Price: ${book.price}`;
-
-  // Append all details to the book card
-  bookCard.appendChild(img);
-  bookCard.appendChild(h3);
-  bookCard.appendChild(authorP);
-  bookCard.appendChild(priceP);
-
-  // Append the book card to the main catalog container
-  catalogContainer.appendChild(bookCard);
+  card.append(title, author, price);
+  bookList.appendChild(card);
 });
 
-// Step 1: Select the DOM element with the id of 'header' and save it to 'bookStoreTitle'
-const bookStoreTitle = document.querySelector("#header");
+// If the header has an id
+const header = document.querySelector("#store-title");
 
-// Step 2: Change the textContent of bookStoreTitle to match the name property of bookStore
+// If it's the main heading tag
+const header = document.querySelector("h1");
+
+// If it has a class
+const header = document.querySelector(".header");
+
+// 1. Select the title element and save it as bookStoreTitle
+const bookStoreTitle = document.getElementById("header");
+
+// 2. Change its text to the name property of the bookStore variable
 bookStoreTitle.textContent = bookStore.name;
 
-// Select the container where all books will be added
-const bookList = document.querySelector("#book-list"); // or whatever selector your lab uses for bookList
-
-// Loop through the array of books (e.g., bookStore.inventory or bookStore.books)
-bookStore.inventory.forEach((book) => {
+bookStore.books.forEach((book) => {
   // 1. Create elements for each book
   const bookContainer = document.createElement("li");
   const bookTitle = document.createElement("h3");
   const bookAuthor = document.createElement("p");
   const bookImage = document.createElement("img");
 
-  // 2. Change textContent / src of each element to match book object
+  // 2. Match the elements to the book object
   bookTitle.textContent = book.title;
   bookAuthor.textContent = book.author;
-  bookImage.src = book.image; // or book.imageUrl / book.cover depending on your object properties
+  bookImage.src = book.imgSrc;
 
-  // 3. Append book elements to bookContainer
-  bookContainer.appendChild(bookTitle);
-  bookContainer.appendChild(bookAuthor);
-  bookContainer.appendChild(bookImage);
-
-  // Append bookContainer element to bookList
+  // 3. Append book elements to bookList
+  bookContainer.append(bookTitle, bookAuthor, bookImage);
   bookList.appendChild(bookContainer);
 });
+  const bookList = document.getElementById("book-list");
 
-bookStore.inventory.forEach((book) => {
-  // Debugging Tip: Check what 'book' looks like in each iteration
-  console.log("Current book object:", book);
+ console.log(bookStoreTitle);      // should print the <h1>, not null
+console.log(bookStore.books);     // confirms the books are an array and shows the property names
 
-  const bookContainer = document.createElement("li");
-  const bookTitle = document.createElement("h3");
-  
-  bookTitle.textContent = book.title;
-
-  // Debugging Tip: Verify the created element and its content
-  console.log("Created h3 element:", bookTitle);
-});
-
-// Complete DOM Lab Solution Overview
-
-// 1. SELECT HEADER & UPDATE STORE TITLE
-const bookStoreTitle = document.querySelector("#header");
-bookStoreTitle.textContent = bookStore.name;
-
-// 2. SELECT CATALOG CONTAINER
-const bookList = document.querySelector("#book-list");
-
-// 3. DYNAMICALLY CREATE & APPEND BOOK ELEMENTS
-bookStore.inventory.forEach((book) => {
-  // Create HTML structure elements
-  const bookContainer = document.createElement("li");
-  const bookTitle = document.createElement("h3");
-  const bookAuthor = document.createElement("p");
-  const bookImage = document.createElement("img");
-
-  // Populate node content from data source
-  bookTitle.textContent = book.title;
-  bookAuthor.textContent = book.author;
-  bookImage.src = book.image;
-
-  // Append leaf nodes into container node
-  bookContainer.appendChild(bookTitle);
-  bookContainer.appendChild(bookAuthor);
-  bookContainer.appendChild(bookImage);
-
-  // Append container node into document tree
-  bookList.appendChild(bookContainer);
-});
+bookStore.books.forEach((book) => {
+  console.log(book);              // shows the exact image property name
+  // ...rest of your code
+}); 

@@ -17,3 +17,6 @@
     "mocha-multi": "^1.1.3"
   }
 }
+
+npx eslint index.js   # catches typos, undefined variables, unused variables
+npm test              # runs the Jest tests against your code
